@@ -4,16 +4,68 @@
 
 using namespace std ;
 
-long long unsigned int Hashcode( string Pattern )
+long long unsigned int Calculate_Hashcode( string &Pattern )
 {
-    long long unsigned int Hash_Code = 0 ;
+    long long unsigned int Hashcode = 0 ;
     int i = Pattern.length() - 1 ; 
     int k = 0 ; 
     while( i > -1 )
     {
-        Hash_Code += Pattern[i] * pow( 256 , k ) ;
+        Hashcode += Pattern[i] * pow( 256 , k ) ;
         k++ ;
         i-- ;
     }
-    return Hash_Code % (long long unsigned int ) pow( 2 , 61 ) ;
+    return Hashcode % (long long unsigned int ) pow( 2 , 61 ) ;
 }
+
+int Rabin_Karp_Algorithm( string &Data , string &Pattern )
+{
+    long long unsigned int Hashcode_Of_Pattern = Calculate_Hashcode( Pattern ) ;
+    string Sliding_Window = "" ;
+    int i = 0 , k = 0 ;
+    while( i < Pattern.length() )
+    {
+        Sliding_Window += Data[i] ;
+        i++ ;
+    }
+    long long unsigned int Hashcode_Of_Sliding_Window = Calculate_Hashcode( Sliding_Window ) ;
+    while( i < Data.length() )
+    {
+        if( Hashcode_Of_Pattern == Hashcode_Of_Sliding_Window )
+        {
+            int j = k , l = 0 ;
+            while( j < Sliding_Window.length() )
+            {
+                if( Sliding_Window[j] != Pattern[l] )
+                {
+                    break ;
+                }
+                j++;
+                l++ ;
+            }
+            if( j == Sliding_Window.length() )
+            {
+                return k ;
+            }
+        }
+        else
+        {
+            Hashcode_Of_Sliding_Window -= Sliding_Window[k] * pow( 256 , Pattern.length() - 1 ) ;
+            k++ ;
+            Hashcode_Of_Sliding_Window *= 256 ;
+            Hashcode_Of_Sliding_Window += Data[i] ;
+            Sliding_Window += Data[k+2] ;
+        }
+        i++ ;
+    }
+    return 0 ;
+}
+
+
+int main()
+{
+    string Data = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" ; 
+    string Pattern = "PQR" ;
+    cout<<"String Found At = "<<Rabin_Karp_Algorithm( Data , Pattern ) ;
+}
+
