@@ -1,16 +1,19 @@
 #include <iostream>
 using namespace std;
 
-class trieNode {
+class trieNode 
+{
    private:
     trieNode* data[26];
     bool endOfQuery;
 
    public:
-    trieNode() {
+    trieNode() 
+    {
         endOfQuery = false;
 
-        for (int i = 0; i < 26; i++) {
+        for (int i = 0; i < 26; i++) 
+        {
             data[i] = NULL;
         }
     }
@@ -18,26 +21,35 @@ class trieNode {
     void insert(string __input) {
         trieNode* temp = this;
 
-        for (int i = 0; i < __input.size(); i++) {
+        for (int i = 0; i < __input.size(); i++) 
+        {
             int index = __input[i] - 'A';
-            if (temp->data[index] == NULL) {
+            if (temp->data[index] == NULL) 
+            {
                 temp->data[index] = new trieNode();
                 temp = temp->data[index];
-            } else {
+            } 
+           else 
+           {
                 temp = temp->data[index];
-            }
+           }
         }
         temp->endOfQuery = true;
     }
 
-    bool search(string __searchQuery) {
+    bool search(string __searchQuery) 
+    {
         trieNode* temp = this;
 
-        for (int i = 0; i < __searchQuery.size(); i++) {
+        for (int i = 0; i < __searchQuery.size(); i++) 
+        {
             int index = __searchQuery[i] - 'A';
-            if (temp->data[index] == NULL) {
+            if (temp->data[index] == NULL) 
+            {
                 return false;
-            } else {
+            } 
+            else 
+            {
                 temp = temp->data[index];
             }
         }
@@ -46,32 +58,43 @@ class trieNode {
     }
 
     ~trieNode() {}
+   
 };
 
-class Trie {
+class Trie 
+{
    private:
     trieNode root;
 
    public:
     Trie() : root() {}
-    void insert(string __key) {
-        for (int i = 0; i < __key.size(); i++) {
+   
+    void insert(string __key) 
+    {
+        for (int i = 0; i < __key.size(); i++) 
+        {
             this->root.insert(__key.substr(i));
         }
     }
 
-    void search(string __searchQuery) {
-        if (root.search(__searchQuery)) {
+    void search(string __searchQuery) 
+    {
+        if (root.search(__searchQuery)) 
+        {
             cout << __searchQuery << " is present\n";
-        } else {
+        } 
+       else 
+       {
             cout << __searchQuery << " is not present\n";
         }
     }
 
     ~Trie() {}
+   
 };
 
-int main(int argc, char const* argv[]) {
+int main(int argc, char const* argv[]) 
+{
     Trie t;
     t.insert("BANANA");
     t.search("BANANA");
