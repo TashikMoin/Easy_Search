@@ -108,7 +108,7 @@ void Knuth_Morris_Algorithm( string &Pattern, string &Data , int Pi_Table[] )
         if (j == Pattern.length() ) 
         { 
             cout<<"String Found At Index : "<< i-j ;
-            j = Pi_Table[j - 1]; 
+            return ; 
         } 
         else if (i < Data.length() && Pattern[j] != Data [i]) 
         { 
@@ -122,6 +122,7 @@ void Knuth_Morris_Algorithm( string &Pattern, string &Data , int Pi_Table[] )
             }
         } 
     } 
+    cout<<"Not Found" ;
 } 
 
 
