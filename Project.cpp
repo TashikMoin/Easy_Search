@@ -65,7 +65,6 @@ int Rabin_Karp_Algorithm( string &Data , string &Pattern )
 void Generate_Pi_Table( string &Pattern , int Pi_Table[] ) 
 { 
     int Counter = 0; 
-    Pi_Table[0] = 0; 
     int j = 1; 
     while ( j < Pattern.length() ) 
     { 
@@ -79,7 +78,7 @@ void Generate_Pi_Table( string &Pattern , int Pi_Table[] )
         { 
             if (Counter != 0) 
             { 
-                Counter = Pi_Table[Counter - 1];
+                Counter = Pi_Table[Counter-1];
             } 
             else 
             { 
