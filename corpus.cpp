@@ -167,8 +167,15 @@ int main(int argc, char const* argv[]) {
     // t.insert("ACGTACGT");
     // t.insert("ACGTAC");
     // t.insert("ACGT");
+    clock_t start;
+    start = clock();
     t.getFromFile();
-    t.search("ACGT");
+    start = clock() - start;
+    cout << "Time taken for insertion: " << (float)start / CLOCKS_PER_SEC << " seconds\n";
+    start = clock();
+    t.search("gatc");
+    start = clock() - start;
+    cout << "Time taken for searching: " << (float)start / CLOCKS_PER_SEC << " seconds\n";
     return 0;
 }
 
