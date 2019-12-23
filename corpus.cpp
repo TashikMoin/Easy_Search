@@ -4,10 +4,6 @@
 #include <iostream>
 using namespace std;
 
-<<<<<<< HEAD
-class trieNode 
-{
-=======
 class listNode {
    public:
     int sIndex;
@@ -62,23 +58,16 @@ class infoList {
 };
 
 class trieNode {
->>>>>>> corpus
    private:
     trieNode* data[26];
     bool endOfQuery;
     infoList list;
 
    public:
-<<<<<<< HEAD
-    trieNode() 
-    {
-=======
     trieNode() : list() {
->>>>>>> corpus
         endOfQuery = false;
 
-        for (int i = 0; i < 26; i++) 
-        {
+        for (int i = 0; i < 26; i++) {
             data[i] = NULL;
         }
     }
@@ -87,44 +76,29 @@ class trieNode {
         trieNode* temp = this;
         transform(__input.begin(), __input.end(), __input.begin(), ::toupper);
 
-        for (int i = 0; i < __input.size(); i++) 
-        {
+        for (int i = 0; i < __input.size(); i++) {
             int index = __input[i] - 'A';
-            if (temp->data[index] == NULL) 
-            {
+            if (temp->data[index] == NULL) {
                 temp->data[index] = new trieNode();
                 temp = temp->data[index];
-<<<<<<< HEAD
-            } 
-           else 
-           {
-                temp = temp->data[index];
-           }
-=======
                 temp->list.addToTail(__index, __index + i, __original);
             } else {
                 temp = temp->data[index];
                 temp->list.addToTail(__index, __index + i, __original);
             }
->>>>>>> corpus
         }
         temp->endOfQuery = true;
     }
 
-    bool search(string __searchQuery) 
-    {
+    bool search(string __searchQuery) {
         trieNode* temp = this;
         listNode* start = NULL;
 
-        for (int i = 0; i < __searchQuery.size(); i++) 
-        {
+        for (int i = 0; i < __searchQuery.size(); i++) {
             int index = __searchQuery[i] - 'A';
-            if (temp->data[index] == NULL) 
-            {
+            if (temp->data[index] == NULL) {
                 return false;
-            } 
-            else 
-            {
+            } else {
                 temp = temp->data[index];
             }
         }
@@ -141,36 +115,14 @@ class trieNode {
     }
 
     ~trieNode() {}
-   
 };
 
-class Trie 
-{
+class Trie {
    private:
     trieNode root;
 
    public:
     Trie() : root() {}
-<<<<<<< HEAD
-   
-    void insert(string __key) 
-    {
-        for (int i = 0; i < __key.size(); i++) 
-        {
-            this->root.insert(__key.substr(i));
-        }
-    }
-
-    void search(string __searchQuery) 
-    {
-        if (root.search(__searchQuery)) 
-        {
-            cout << __searchQuery << " is present\n";
-        } 
-       else 
-       {
-            cout << __searchQuery << " is not present\n";
-=======
     void insert(string __key) {
         for (int i = 0; i < __key.size(); i++) {
             this->root.insert(__key, __key.substr(i), i);
@@ -181,16 +133,13 @@ class Trie
         transform(__searchQuery.begin(), __searchQuery.end(), __searchQuery.begin(), ::toupper);
         if (!root.search(__searchQuery)) {
             cout << __searchQuery << " not found\n";
->>>>>>> corpus
         }
     }
 
     ~Trie() {}
-   
 };
 
-int main(int argc, char const* argv[]) 
-{
+int main(int argc, char const* argv[]) {
     Trie t;
     t.insert("cacacaaa");
     t.insert("accccgac");
@@ -198,8 +147,6 @@ int main(int argc, char const* argv[])
     t.search("accc");
     return 0;
 }
-<<<<<<< HEAD
-=======
 
 /* 
     clock_t start;
@@ -207,4 +154,3 @@ int main(int argc, char const* argv[])
     start = clock() - start;
     cout << "Time taken for insertion: " << (float)start / CLOCKS_PER_SEC << " seconds\n"; 
  */
->>>>>>> corpus
