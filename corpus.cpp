@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 #include <cstring>
 #include <ctime>
+#include <fstream>
 #include <iostream>
 using namespace std;
 
@@ -59,7 +60,7 @@ class infoList {
 
 class trieNode {
    private:
-    trieNode* data[26];
+    trieNode* data[4];
     bool endOfQuery;
     infoList list;
 
@@ -67,9 +68,22 @@ class trieNode {
     trieNode() : list() {
         endOfQuery = false;
 
-        for (int i = 0; i < 26; i++) {
+        for (int i = 0; i < 4; i++) {
             data[i] = NULL;
         }
+    }
+
+    int returnIndex(char __input) {
+        if (__input == 'A') {
+            return 0;
+        } else if (__input == 'C') {
+            return 1;
+        } else if (__input == 'G') {
+            return 2;
+        } else if (__input == 'T') {
+            return 3;
+        }
+        return -1;
     }
 
     void insert(string __original, string __input, int __index) {
@@ -77,7 +91,7 @@ class trieNode {
         transform(__input.begin(), __input.end(), __input.begin(), ::toupper);
 
         for (int i = 0; i < __input.size(); i++) {
-            int index = __input[i] - 'A';
+            int index = returnIndex(__input[i]);
             if (temp->data[index] == NULL) {
                 temp->data[index] = new trieNode();
                 temp = temp->data[index];
@@ -95,7 +109,7 @@ class trieNode {
         listNode* start = NULL;
 
         for (int i = 0; i < __searchQuery.size(); i++) {
-            int index = __searchQuery[i] - 'A';
+            int index = returnIndex(__searchQuery[i]);
             if (temp->data[index] == NULL) {
                 return false;
             } else {
@@ -129,6 +143,15 @@ class Trie {
         }
     }
 
+    void getFromFile() {
+        ifstream inputFile;
+        inputFile.open("test.txt");
+        string input;
+        while (inputFile >> input) {
+            this->insert(input);
+        }
+    }
+
     void search(string __searchQuery) {
         transform(__searchQuery.begin(), __searchQuery.end(), __searchQuery.begin(), ::toupper);
         if (!root.search(__searchQuery)) {
@@ -141,10 +164,11 @@ class Trie {
 
 int main(int argc, char const* argv[]) {
     Trie t;
-    t.insert("cacacaaa");
-    t.insert("accccgac");
-    t.insert("tccttagc");
-    t.search("accc");
+    // t.insert("ACGTACGT");
+    // t.insert("ACGTAC");
+    // t.insert("ACGT");
+    t.getFromFile();
+    t.search("ACGT");
     return 0;
 }
 
