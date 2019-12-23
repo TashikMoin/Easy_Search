@@ -58,7 +58,7 @@ int Rabin_Karp_Algorithm( string &Data , string &Pattern , int Start = 0 )
         }
         i++ ;
     }
-    return 0 ;
+    return -1 ;
 }
 
 
