@@ -164,9 +164,6 @@ class Trie {
 
 int main(int argc, char const* argv[]) {
     Trie t;
-    // t.insert("ACGTACGT");
-    // t.insert("ACGTAC");
-    // t.insert("ACGT");
     clock_t start;
     start = clock();
     t.getFromFile();
