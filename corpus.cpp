@@ -153,6 +153,10 @@ class Trie {
         inputFile.open("test.txt");
         string input;
         while (inputFile >> input) {
+            int found = input.find('N');
+            if (found != string::npos) {
+                continue;
+            }
             this->insert(input);
         }
     }
@@ -160,6 +164,14 @@ class Trie {
     void search(string __searchQuery) {
         ofstream outputFile;
         outputFile.open("corpusOutput.txt");
+
+        int found = __searchQuery.find('N');
+        if (found != string::npos) {
+            cout << __searchQuery << " contains undefined nucleotide\n";
+            outputFile << __searchQuery << " contains undefined nucleotide\n";
+            return;
+        }
+
         transform(__searchQuery.begin(), __searchQuery.end(), __searchQuery.begin(), ::toupper);
         if (!root.search(__searchQuery)) {
             cout << __searchQuery << " not found\n";
