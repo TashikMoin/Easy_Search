@@ -220,12 +220,12 @@ class Trie
 
 int main()
 {
-    string Data = "abcjefhhabcjejfhehabchf" ;
-    string Pattern = "abc" ;
-    int i = 0 ; // set
+    string Data = "abcdefghijkabcdefghijkabcdefijgffhgijjhsjghghsf" ;
+    string Pattern = "gh" ;
+    int i = 0 ; 
     while( i < Data.length() )
     {
-        i = Knuth_Morris_Algorithm( Pattern , Data , i) ;
+        i = Rabin_Karp_Algorithm( Data , Pattern , i ) ;
         if(i != -1 )
         {
             cout<<"Starting = "<<i<<"  Ending = "<<i+Pattern.length()-1<<" \n" ;
@@ -237,7 +237,6 @@ int main()
         
         i++ ;
     }
-    
 
 }
 
