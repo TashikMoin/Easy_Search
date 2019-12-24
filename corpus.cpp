@@ -124,10 +124,11 @@ class trieNode {
             cout << "Query for search: " << __searchQuery << '\n';
 
             while (start != NULL) {
-                //      cout << "Pattern match in: " << start->source << " start: " << start->sIndex << " end: " << start->eIndex << '\n';
+                cout << "Pattern match in: " << start->source << " start: " << start->sIndex << " end: " << start->eIndex << '\n';
                 outputFile << "Pattern match in: " << start->source << " start: " << start->sIndex << " end: " << start->eIndex << '\n';
                 start = start->next;
             }
+            outputFile.close();
             return (true);
         }
         return (false);
@@ -150,7 +151,7 @@ class Trie {
 
     void getFromFile() {
         ifstream inputFile;
-        inputFile.open("test.txt");
+        inputFile.open("input.txt");
         string input;
         while (inputFile >> input) {
             int found = input.find('N');
@@ -177,6 +178,7 @@ class Trie {
             cout << __searchQuery << " not found\n";
             outputFile << __searchQuery << " not found\n";
         }
+        outputFile.close();
     }
 
     ~Trie() {}
@@ -188,7 +190,7 @@ int main(int argc, char const* argv[]) {
     start = clock();
     t.getFromFile();
     start = clock() - start;
-    cout << "Time taken for insertion: " << (float)start / CLOCKS_PER_SEC << " seconds\n";
+    cout << "\n\nTime taken for insertion: " << (float)start / CLOCKS_PER_SEC << " seconds\n\n";
     start = clock();
     t.search("gatc");
     start = clock() - start;

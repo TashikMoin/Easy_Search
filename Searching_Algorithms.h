@@ -96,7 +96,9 @@ int Knuth_Morris_Algorithm(string &Data, string &Pattern, int Start = 0) {
 
 void searchFromFileRK(string __searchQuery) {
     ifstream inputFile;
-    inputFile.open("test.txt");
+    ofstream outputFile;
+    inputFile.open("input.txt");
+    outputFile.open("rabinOutput.txt");
     string input;
     int i = 0;
 
@@ -109,7 +111,8 @@ void searchFromFileRK(string __searchQuery) {
         while (i < input.length()) {
             i = Rabin_Karp_Algorithm(input, __searchQuery, i);
             if (i != -1) {
-                //   cout << "Pattern match in " << original << " start: " << i << " end: " << i + __searchQuery.length() - 1 << '\n';
+                cout << "Pattern match in " << original << " start: " << i << " end: " << i + __searchQuery.length() - 1 << '\n';
+                outputFile << "Pattern match in " << original << " start: " << i << " end: " << i + __searchQuery.length() - 1 << '\n';
             } else {
                 i = input.length();
             }
@@ -117,11 +120,14 @@ void searchFromFileRK(string __searchQuery) {
         }
         i = 0;
     }
+    outputFile.close();
 }
 
 void searchFromFileKM(string __searchQuery) {
     ifstream inputFile;
-    inputFile.open("test.txt");
+    ofstream outputFile;
+    inputFile.open("input.txt");
+    outputFile.open("kmpOutput.txt");
     string input;
     int i = 0;
 
@@ -134,7 +140,7 @@ void searchFromFileKM(string __searchQuery) {
         while (i < input.length()) {
             i = Knuth_Morris_Algorithm(input, __searchQuery, i);
             if (i != -1) {
-                //  cout << "Pattern match in " << original << " start: " << i << " end: " << i + __searchQuery.length() - 1 << '\n';
+                cout << "Pattern match in " << original << " start: " << i << " end: " << i + __searchQuery.length() - 1 << '\n';
             } else {
                 i = input.length();
             }
@@ -142,4 +148,5 @@ void searchFromFileKM(string __searchQuery) {
         }
         i = 0;
     }
+    outputFile.close();
 }
