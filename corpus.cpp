@@ -181,6 +181,15 @@ class Trie {
         outputFile.close();
     }
 
+    void testFromFile() {
+        ifstream inputFile;
+        inputFile.open("testCase.txt");
+        string input;
+        inputFile >> input;
+        this->search(input);
+        inputFile.close();
+    }
+
     ~Trie() {}
 };
 
@@ -192,7 +201,7 @@ int main(int argc, char const* argv[]) {
     start = clock() - start;
     cout << "\n\nTime taken for insertion: " << (float)start / CLOCKS_PER_SEC << " seconds\n\n";
     start = clock();
-    t.search("gatc");
+    t.testFromFile();
     start = clock() - start;
     cout << "Time taken for searching: " << (float)start / CLOCKS_PER_SEC << " seconds\n";
     return 0;

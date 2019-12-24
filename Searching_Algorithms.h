@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 #include <math.h>
+#include <time.h>
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -141,6 +142,7 @@ void searchFromFileKM(string __searchQuery) {
             i = Knuth_Morris_Algorithm(input, __searchQuery, i);
             if (i != -1) {
                 cout << "Pattern match in " << original << " start: " << i << " end: " << i + __searchQuery.length() - 1 << '\n';
+                outputFile << "Pattern match in " << original << " start: " << i << " end: " << i + __searchQuery.length() - 1 << '\n';
             } else {
                 i = input.length();
             }
@@ -149,4 +151,22 @@ void searchFromFileKM(string __searchQuery) {
         i = 0;
     }
     outputFile.close();
+}
+
+void testFromFile() {
+    ifstream inputFile;
+    inputFile.open("testCase.txt");
+    string input;
+    inputFile >> input;
+
+    clock_t start;
+    start = clock();
+    searchFromFileKM(input);
+    start = clock() - start;
+    cout << "Time taken for searching in KNUTTH MORRIS: " << (float)start / CLOCKS_PER_SEC << " seconds\n";
+
+    start = clock();
+    searchFromFileRK(input);
+    start = clock() - start;
+    cout << "Time taken for searching in RABIN KARP: " << (float)start / CLOCKS_PER_SEC << " seconds\n";
 }
