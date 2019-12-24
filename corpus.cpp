@@ -105,6 +105,8 @@ class trieNode {
     }
 
     bool search(string __searchQuery) {
+        ofstream outputFile;
+        outputFile.open("corpusOutput.txt");
         trieNode* temp = this;
         listNode* start = NULL;
 
@@ -117,15 +119,18 @@ class trieNode {
             }
         }
 
-        start = temp->list.getHead();
-        cout << "Query for search: " << __searchQuery << '\n';
+        if (temp != NULL) {
+            start = temp->list.getHead();
+            cout << "Query for search: " << __searchQuery << '\n';
 
-        while (start != NULL) {
-            cout << "Pattern match in: " << start->source << " start: " << start->sIndex << " end: " << start->eIndex << '\n';
-            start = start->next;
+            while (start != NULL) {
+                cout << "Pattern match in: " << start->source << " start: " << start->sIndex << " end: " << start->eIndex << '\n';
+                outputFile << "Pattern match in: " << start->source << " start: " << start->sIndex << " end: " << start->eIndex << '\n';
+                start = start->next;
+            }
+            return (true);
         }
-
-        return (true);
+        return (false);
     }
 
     ~trieNode() {}
@@ -153,9 +158,12 @@ class Trie {
     }
 
     void search(string __searchQuery) {
+        ofstream outputFile;
+        outputFile.open("corpusOutput.txt");
         transform(__searchQuery.begin(), __searchQuery.end(), __searchQuery.begin(), ::toupper);
         if (!root.search(__searchQuery)) {
             cout << __searchQuery << " not found\n";
+            outputFile << __searchQuery << " not found\n";
         }
     }
 
