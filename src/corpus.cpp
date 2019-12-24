@@ -106,7 +106,7 @@ class trieNode {
 
     bool search(string __searchQuery) {
         ofstream outputFile;
-        outputFile.open("corpusOutput.txt");
+        outputFile.open("./doc/corpusOutput.txt");
         trieNode* temp = this;
         listNode* start = NULL;
 
@@ -151,7 +151,7 @@ class Trie {
 
     void getFromFile() {
         ifstream inputFile;
-        inputFile.open("input.txt");
+        inputFile.open("../doc/input.txt");
         string input;
         while (inputFile >> input) {
             int found = input.find('N');
@@ -164,7 +164,7 @@ class Trie {
 
     void search(string __searchQuery) {
         ofstream outputFile;
-        outputFile.open("corpusOutput.txt");
+        outputFile.open("./doc/corpusOutput.txt");
 
         int found = __searchQuery.find('N');
         if (found != string::npos) {
@@ -183,7 +183,7 @@ class Trie {
 
     void testFromFile() {
         ifstream inputFile;
-        inputFile.open("testCase.txt");
+        inputFile.open("../doc/testCase.txt");
         string input;
         inputFile >> input;
         this->search(input);
