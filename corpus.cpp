@@ -124,7 +124,7 @@ class trieNode {
             cout << "Query for search: " << __searchQuery << '\n';
 
             while (start != NULL) {
-                cout << "Pattern match in: " << start->source << " start: " << start->sIndex << " end: " << start->eIndex << '\n';
+                //      cout << "Pattern match in: " << start->source << " start: " << start->sIndex << " end: " << start->eIndex << '\n';
                 outputFile << "Pattern match in: " << start->source << " start: " << start->sIndex << " end: " << start->eIndex << '\n';
                 start = start->next;
             }
