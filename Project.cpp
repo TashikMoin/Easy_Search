@@ -18,11 +18,11 @@ long long unsigned int Calculate_Hashcode( string &Pattern )
     return Hashcode % (long long unsigned int ) pow( 2 , 61 ) ;
 }
 
-int Rabin_Karp_Algorithm( string &Data , string &Pattern )
+int Rabin_Karp_Algorithm( string &Data , string &Pattern , int Start = 0 )
 {
     long long unsigned int Hashcode_Of_Pattern = Calculate_Hashcode( Pattern ) ;
     string Sliding_Window = "" ;
-    int i = 0 , k = 0 ;
+    int i = Start , k = 0 ;
     while( i < Pattern.length() )
     {
         Sliding_Window += Data[i] ;
@@ -58,7 +58,7 @@ int Rabin_Karp_Algorithm( string &Data , string &Pattern )
         }
         i++ ;
     }
-    return 0 ;
+    return -1 ;
 }
 
 
@@ -91,11 +91,12 @@ void Generate_Pi_Table( string &Pattern , int Pi_Table[] )
 
 
 
-void Knuth_Morris_Algorithm( string &Pattern, string &Data , int Pi_Table[] ) 
+int Knuth_Morris_Algorithm( string &Pattern, string &Data , int Start = 0 ) 
 { 
+    int Pi_Table[Pattern.length()] = {0} ;
     Generate_Pi_Table(Pattern, Pi_Table); 
-    int i = 0; 
-    int j = 0; 
+    int i = Start ; 
+    int j = 0 ; 
     while ( i < Data.length() ) 
     { 
         if (Pattern[j] == Data [i]) 
@@ -103,17 +104,15 @@ void Knuth_Morris_Algorithm( string &Pattern, string &Data , int Pi_Table[] )
             j++; 
             i++; 
         } 
-  
         if (j == Pattern.length() ) 
         { 
-            cout<<"String Found At Index : "<< i-j ;
-            return ; 
+            return i-j ; 
         } 
         else if (i < Data.length() && Pattern[j] != Data [i]) 
         { 
             if (j != 0)
             {
-                j = Pi_Table[j - 1] ;
+                j = Pi_Table[j-1] ;
             } 
             else
             {
@@ -121,7 +120,7 @@ void Knuth_Morris_Algorithm( string &Pattern, string &Data , int Pi_Table[] )
             }
         } 
     } 
-    cout<<"Not Found" ;
+    return -1 ;
 } 
 
 
@@ -221,9 +220,24 @@ class Trie
 
 int main()
 {
-    string Data = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" ; 
-    string Pattern = "GHI" ; 
-    int Pi_Table[Pattern.length()] = {0} ;
-    Knuth_Morris_Algorithm( Pattern , Data , Pi_Table ) ;
+    string Data = "abcjefhhabcjejfhehabchf" ;
+    string Pattern = "abc" ;
+    int i = 0 ; // set
+    while( i < Data.length() )
+    {
+        i = Knuth_Morris_Algorithm( Pattern , Data , i) ;
+        if(i != -1 )
+        {
+            cout<<"Starting = "<<i<<"  Ending = "<<i+Pattern.length()-1<<" \n" ;
+        }
+        else
+        {
+            i = Data.length() ;
+        }
+        
+        i++ ;
+    }
+    
+
 }
 
