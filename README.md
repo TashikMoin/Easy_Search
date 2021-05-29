@@ -1,4 +1,4 @@
-# DNA Corpus Matching Using SUFFIX TRIE, Rabin-Karp and KMP Algorithm
+# Easy Search
 
 ## What is a DNA strand?
 
